@@ -44,8 +44,8 @@ KD_courses = pd.merge(KD_courses, df_data_div, left_index=True, right_index=True
 
 # Extract matrix
 df_students = df_students.reset_index()
-#X = df_students.get_values()
+X = df_students.get_values()
 attributeNames = df_students.columns
-#N = len(X)
+N = len(X)
 M = len(attributeNames)
 
