@@ -96,14 +96,4 @@ for k in range(2):
     plt.title(titles[k]+'\n'+'Variance explained')
 
 plt.show()
-        
 
-
-# POST NORMALIZE
-r = np.arange(1,Y2.shape[1]+1)
-plt.bar(r, np.std(Y2,0))
-plt.xticks(r, attributeNames, rotation=90)
-plt.ylabel('Standard deviation')
-plt.xlabel('Attributes')
-plt.title('NanoNose: attribute standard deviations')
-         

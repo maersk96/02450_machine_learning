@@ -36,9 +36,17 @@ labels = ['PC' + str(x) for x in range(1,len(rho)+1)]
 plt.bar(x=range(1,len(rho)+1), height=rho, tick_label=labels)
 plt.ylabel('Percentage of explained variace')
 plt.xlabel('Principal Component')
+plt.xticks(rotation=90)
 plt.title('Scree plot')
 plt.show()
 
 
+# Correlation
+import matplotlib.pyplot as plt
 
-plt.plot(V, df_pca['budget'])
+plt.matshow(df_pca.corr())
+plt.title('Attribute Correlation Matrix', pad=20)
+plt.ylabel('Attribute')
+plt.xlabel('Attribute')
+cb = plt.colorbar()
+plt.show()
