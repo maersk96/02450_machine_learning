@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-from pca import *
+from pca_preparation import *
+
 import matplotlib.pyplot as plt
 from scipy.linalg import svd
 
