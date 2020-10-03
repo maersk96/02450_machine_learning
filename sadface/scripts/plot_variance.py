@@ -3,10 +3,13 @@ from pca import *
 import matplotlib.pyplot as plt
 from scipy.linalg import svd
 
+idx = np.argwhere(np.all(X[..., :] == 0, axis=0))
+X = np.delete(X, idx, axis=1)
+
 # Subtract mean value from data
 Y = X - np.ones((N,1))*X.mean(axis=0)
 
-# Standardized
+# # Standardized
 Y2 = X - np.ones((N, 1))*X.mean(0)
 Y2 = Y2*(1/np.std(Y2,0))
 
@@ -15,7 +18,7 @@ U,S,V = svd(Y2,full_matrices=False)
 
 # Compute variance explained by principal components
 rho = (S*S) / (S*S).sum() 
-rho = rho[:10]
+#rho = rho[:20]
 
 threshold = 0.90
 
@@ -29,4 +32,11 @@ plt.xlabel('Principal component');
 plt.ylabel('Variance explained');
 plt.legend(['Individual','Cumulative','Threshold'])
 plt.grid()
+plt.show()
+
+labels = ['PC' + str(x) for x in range(1,len(rho)+1)]
+plt.bar(x=range(1,len(rho)+1), height=rho, tick_label=labels)
+plt.ylabel('Percentage of explained variace')
+plt.xlabel('Principal Component')
+plt.title('Scree plot')
 plt.show()

@@ -14,7 +14,7 @@ y = np.asarray([classDict[value] for value in classLabels])
 df_students = df_students.drop(["programme","student_id"], axis=1)
 
 # Extract matrix
-X = df_students.get_values()
+X = df_students.to_numpy()
 attributeNames = df_students.columns
 N = len(X)
 M = len(attributeNames)
