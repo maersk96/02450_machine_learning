@@ -14,19 +14,19 @@ df['genres'] = df['genres'].apply(json.loads)
 
 # K-out-of-one encoding
 
-#i = 0
-#for genres in df['genres']:
-#    for genre in genres:
-#        df_pca.loc[i, genre['name']] = 1
-#    i += 1
-#    
-#j = 0
-#for lang in df['original_language']:
-#    if lang == 'en':
-#        df_pca.loc[j, 'english'] = 1
-#    else:
-#        df_pca.loc[j, 'english'] = 0
-#    j += 1   
+i = 0
+for genres in df['genres']:
+    for genre in genres:
+        df_pca.loc[i, genre['name']] = 1
+    i += 1
+    
+j = 0
+for lang in df['original_language']:
+    if lang == 'en':
+        df_pca.loc[j, 'english'] = 1
+    else:
+        df_pca.loc[j, 'english'] = 0
+    j += 1   
     
     
 # Fill N/A's

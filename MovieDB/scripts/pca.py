@@ -15,7 +15,6 @@ U,S,V = svd(Y2,full_matrices=False)
 
 # Compute variance explained by principal components
 rho = (S*S) / (S*S).sum() 
-rho = rho[:10]
 
 threshold = 0.90
 
@@ -30,3 +29,16 @@ plt.ylabel('Variance explained');
 plt.legend(['Individual','Cumulative','Threshold'])
 plt.grid()
 plt.show()
+
+
+# Scree plot
+labels = ['PC' + str(x) for x in range(1,len(rho)+1)]
+plt.bar(x=range(1,len(rho)+1), height=rho, tick_label=labels)
+plt.ylabel('Percentage of explained variace')
+plt.xlabel('Principal Component')
+plt.title('Scree plot')
+plt.show()
+
+
+
+plt.plot(V, df_pca['budget'])

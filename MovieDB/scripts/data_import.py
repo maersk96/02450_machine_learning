@@ -12,4 +12,4 @@ df_stats['median'] = df.median(axis=0)
 
 
 # Drop nan-values
-df = df.drop(4553) # No release data + sad info
+#df = df.drop(4553) # No release data + sad info
