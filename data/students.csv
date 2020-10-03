@@ -1,4 +1,4 @@
-﻿student_id;age;programme;degree;start_time;ects_points
+﻿student_id;start_age;programme;degree;start_date;ects_points
 1000;20,88;Byggeteknologi;BSc;01-09-2019;45
 1001;18,88;Byggeteknologi;BSc;01-09-2020;0
 1002;21,02;Byggeteknologi;BSc;01-09-2020;10
