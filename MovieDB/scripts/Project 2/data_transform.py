@@ -3,6 +3,7 @@ import json
 
 #Transform Language - Boolean if(eng) = true else false
 df['original_language'] = df['original_language'] == 'en'; 
+df.rename(columns={'original_language': 'english'}, inplace=True);
 
 #Transform Title to number of characters
 df['title'] = df['title'].str.len().fillna(0);
@@ -21,16 +22,18 @@ df['vote_average'] = df['vote_average'].round(0);
 
 #One out of K encoding
 #Json formatting
-df['genres'] = df['genres'].apply(json.loads);
-df['keywords'] = df['keywords'].apply(json.loads);
-df['production_companies'] = df['production_companies'].apply(json.loads);
 
-##This does not work!
-# df=(df.drop('genres', axis=1)
-#     .join(pd.get_dummies(pd.DataFrame.from_records(df['genres'][0])['name'].explode())
-#         .sum(level=0)
-#     ).fillna(0)
-# )
+def KEncode(column, key):
+    return df.drop(column, axis=1).join(pd.get_dummies(
+            pd.Series(df[column].apply(json.loads).map(lambda x:[i[key] for i in x])
+                .apply(pd.Series).stack().reset_index(1, drop=True))).sum(level=0)
+           ).fillna(0)
+    
+df = KEncode('genres', 'name')
+#df = KEncode('production_companies', 'name')
+#df = KEncode('keywords', 'name')
+
+
 
 
 #TODO
@@ -43,3 +46,11 @@ df['production_companies'] = df['production_companies'].apply(json.loads);
 #DONE -- trans_month();
 #DONE -- trans_year();
 #DONE -- trans_voteAvg();
+
+
+# General variables
+# ...
+
+# Classification variabels
+y = df['vote_average'].get_values()
+del df['vote_average']
