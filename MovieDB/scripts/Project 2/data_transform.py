@@ -37,4 +37,4 @@ del df['homepage']
 del df['overview']
 
 #Fill NaNs
-df.fillna(0)
+df = df.fillna(0)
