@@ -31,7 +31,7 @@ CV = model_selection.KFold(K, shuffle=True, random_state=1)
 #CV = model_selection.KFold(K, shuffle=False)
 
 # Values of lambda
-lambdas = np.power(10.,range(-10,9))
+lambdas = np.power(10.,range(0,8))
 
 # Initialize variables
 #T = len(lambdas)
