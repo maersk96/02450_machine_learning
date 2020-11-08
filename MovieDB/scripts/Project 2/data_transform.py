@@ -13,9 +13,10 @@ df['title'] = df['title'].str.len().fillna(0);
 df['tagline'] = df['tagline'].str.len().fillna(0);
 
 #Transform Time to Month and Years
+df.dropna(axis=0,subset=['release_date'], inplace=True);
 df_DateSplit = df['release_date'].str.split('/', expand=True);
-df['month'] = df_DateSplit[1];
-df['year'] = df_DateSplit[2]; 
+df['month'] = df_DateSplit[1].astype('int32');
+df['year'] = df_DateSplit[2].astype('int32'); 
 del df['release_date'];
 
 #Transform Voting average to int

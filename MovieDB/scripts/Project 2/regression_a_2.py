@@ -13,10 +13,10 @@ from toolbox_02450 import rlr_validate
 
 # Extract data
 y = preprocessing.scale(df['revenue'].values)
-df_X = df.drop(['revenue', 'vote_average', 'vote_count', 'popularity'],1)
+df_X = df.drop(['revenue', 'vote_average', 'vote_count', 'popularity'],1) * 1#convert bools
 X = preprocessing.scale(df_X.values)
 attributeNames = df_X.columns
-N, M = X.shape
+N, M = df_X.shape
 
 # Add offset attribute
 X = np.concatenate((np.ones((X.shape[0],1)),X),1)
@@ -30,7 +30,7 @@ CV = model_selection.KFold(K, shuffle=True)
 #CV = model_selection.KFold(K, shuffle=False)
 
 # Values of lambda
-lambdas = np.power(10.,range(-5,9))
+lambdas = np.power(10.,range(-2,9))
 
 # Initialize variables
 #T = len(lambdas)
