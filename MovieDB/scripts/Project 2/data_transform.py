@@ -26,8 +26,8 @@ df['vote_average'] = df['vote_average'].round(0);
 df = KEncode(df, 'genres', 'name', 50) # +20 features
 #del df['genres'] 
 
-df = KEncode(df, 'keywords', 'name', 100) # +10.000 features
-#del df['keywords'] 
+#df = KEncode(df, 'keywords', 'name', 100) # +10.000 features
+del df['keywords'] 
 
 #df = KEncode(df, 'production_countries', 'name', 10) # +100 features
 #df = KEncode(df, 'production_companies', 'name', 100) # +5.000 features

@@ -1,6 +1,7 @@
 # from exercise 8.1.1
 
 from data_transform import *
+from sklearn import preprocessing
 
 from matplotlib.pylab import (figure, semilogx, loglog, xlabel, ylabel, legend, 
                            title, subplot, show, grid)
