@@ -1,8 +1,9 @@
 from data_transform import *
 from sklearn import preprocessing
 
-# Extract X-matrix
-X = df.get_values()
+# Extract X matrix and y vector
+y = df['revenue'].values
+X = df.drop(['revenue']).values
 
 # Scale X to mean=0 and std=1
 X = preprocessing.scale(X)

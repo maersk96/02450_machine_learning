@@ -21,18 +21,23 @@ del df['release_date'];
 #Transform Voting average to int
 df['vote_average'] = df['vote_average'].round(0);
 
+
 #KEncode
 df = KEncode(df, 'genres', 'name', 50) # +20 features
+#del df['genres'] 
+
+df = KEncode(df, 'keywords', 'name', 100) # +10.000 features
+#del df['keywords'] 
+
 #df = KEncode(df, 'production_countries', 'name', 10) # +100 features
 #df = KEncode(df, 'production_companies', 'name', 100) # +5.000 features
-df = KEncode(df, 'keywords', 'name', 100) # +10.000 features
+
 
 #Remove unnecessary columns
 del df['id'] 
 del df['spoken_languages'] 
 del df['production_companies'] 
 del df['production_countries'] 
-#del df['keywords'] 
 del df['homepage'] 
 del df['overview']
 
