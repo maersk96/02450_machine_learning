@@ -21,36 +21,38 @@ del df['release_date'];
 df['vote_average'] = df['vote_average'].round(0);
 
 #One out of K encoding
-#Json formatting
-
 def KEncode(column, key):
     return df.drop(column, axis=1).join(pd.get_dummies(
             pd.Series(df[column].apply(json.loads).map(lambda x:[i[key] for i in x])
-                .apply(pd.Series).stack().reset_index(1, drop=True))).sum(level=0)
-           ).fillna(0)
+                .apply(pd.Series).stack().reset_index(1, drop=True)))
+                .sum(level=0)
+                .add_prefix(column + '_')
+                .fillna(0)
+           )
     
-df = KEncode('genres', 'name')
-#df = KEncode('production_companies', 'name')
-#df = KEncode('keywords', 'name')
+df = KEncode('genres', 'name') # +20 features
+#df = KEncode('production_countries', 'name') # +100 features
+#df = KEncode('production_companies', 'name') # +5.000 features
+#df = KEncode('keywords', 'name') # +10.000 features
 
+#Remove unnecessary columns
+del df['id'] 
+del df['spoken_languages'] 
+del df['production_companies'] 
+del df['production_countries'] 
+del df['keywords'] 
+del df['homepage'] 
+del df['overview']
 
-
-
-#TODO
-#DONE -- trans_lang();
-#trans_genre();
-#trans_keywords();
-#trans_prodComp();
-#DONE -- trans_title();
-#DONE -- trans_tagline();
-#DONE -- trans_month();
-#DONE -- trans_year();
-#DONE -- trans_voteAvg();
-
-
-# General variables
-# ...
+## Prepare for ML
+# Extract X-matrix
+X = df.get_values()
 
 # Classification variabels
 y = df['vote_average'].get_values()
-del df['vote_average']
+# del df['vote_average']
+
+# Compute values of N, M and C.
+N = len(y)
+#M = len(attributeNames)
+#C = len(classNames)
