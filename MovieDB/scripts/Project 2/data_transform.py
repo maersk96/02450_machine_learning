@@ -1,5 +1,6 @@
 from data_import import *
 from KEncode import *
+import numpy as np
 
 #Transform Language - Boolean if(eng) = true else false
 df['original_language'] = df['original_language'] == 'en'; 
@@ -20,10 +21,7 @@ del df['release_date'];
 #Transform Voting average to int
 df['vote_average'] = df['vote_average'].round(0);
 
-
-#Normalize
-## <====>
-
+#KEncode
 df = KEncode(df, 'genres', 'name', 50) # +20 features
 #df = KEncode(df, 'production_countries', 'name', 10) # +100 features
 #df = KEncode(df, 'production_companies', 'name', 100) # +5.000 features
@@ -38,16 +36,5 @@ del df['production_countries']
 del df['homepage'] 
 del df['overview']
 
-## Prepare for ML
-# Extract X-matrix
+#Fill NaNs
 df.fillna(0)
-X = df.get_values()
-
-# Classification variabels
-y = df['vote_average'].get_values()
-# del df['vote_average']
-
-# Compute values of N, M and C.
-N = len(y)
-#M = len(attributeNames)
-#C = len(classNames)
