@@ -15,3 +15,4 @@ weights = mdl.coef_[0]
 # mdl.predict(X[5].reshape(1,-1))
 
 print(weights)
+
