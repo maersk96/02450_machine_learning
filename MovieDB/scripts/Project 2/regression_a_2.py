@@ -56,6 +56,8 @@ for train_index, test_index in CV.split(X,y):
     internal_cross_validation = 10    
     
     opt_val_err, opt_lambda, mean_w_vs_lambda, train_err_vs_lambda, test_err_vs_lambda = rlr_validate(X_train, y_train, lambdas, internal_cross_validation)
+    
+    print(opt_lambda, ' : ', opt_val_err)
 
     # Standardize outer fold based on training set, and save the mean and standard
     # deviations since they're part of the model (they would be needed for
