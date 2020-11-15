@@ -1,0 +1,1 @@
+from sklearn import treecriterion='entropy'def model_CT(X,y):    dtc = tree.DecisionTreeClassifier(criterion=criterion, min_samples_split=2, min_impurity_decrease=0.000)    dtc = dtc.fit(X,y)    return dtc.fit(X,y)
