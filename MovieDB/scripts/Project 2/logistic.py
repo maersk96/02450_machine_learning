@@ -1,6 +1,6 @@
 import sklearn.linear_model as lm
 
-from data_prepare_classification import *
+from data_prepare_logistic import *
 
 regularization_strength = 1e2
 
@@ -10,5 +10,8 @@ mdl = lm.LogisticRegression(solver='sag', multi_class='multinomial',
 mdl = mdl.fit(X,y)
 
 weights = mdl.coef_[0]
+
+# Predict
+# mdl.predict(X[5].reshape(1,-1))
 
 print(weights)

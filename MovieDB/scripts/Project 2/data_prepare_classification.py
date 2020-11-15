@@ -2,7 +2,7 @@ from data_transform import *
 from sklearn import preprocessing
 
 # Extract X matrix and y vector
-y = df['revenue'].values.astype(int)
+y = df['vote_average'].values.astype(int)
 
 # Extract data
 df_X = df.drop(['revenue', 'vote_average', 'vote_count', 'popularity'],1) * 1#convert bools
