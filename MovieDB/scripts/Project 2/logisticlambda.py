@@ -36,8 +36,8 @@ coefficient_norm = np.zeros(len(lambda_interval))
 for k in range(0, len(lambda_interval)):
     #mdl = LogisticRegression(penalty='l2', C=1/lambda_interval[k] )
     
-    mdl = LogisticRegression.LogisticRegression(solver='sag', multi_class='multinomial', 
-                                   tol=1e-4, random_state=1, 
+    mdl = LogisticRegression(solver='sag', multi_class='multinomial', 
+                                   tol=1e-2, random_state=1, 
                                    penalty='l2', C=1/lambda_interval[k])
     
     mdl.fit(X_train, y_train)

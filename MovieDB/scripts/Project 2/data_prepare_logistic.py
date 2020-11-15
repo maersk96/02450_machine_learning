@@ -1,6 +1,8 @@
 from data_transform import *
 from sklearn import preprocessing
 
+df = df[df['vote_average'] != 9] # Remove class with 1 member
+
 # Extract X matrix and y vector
 y = df['vote_average'].values.astype(int)
 
