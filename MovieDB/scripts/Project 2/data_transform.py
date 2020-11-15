@@ -19,7 +19,7 @@ df['month'] = df_DateSplit[1].astype('int32');
 df['year'] = df_DateSplit[2].astype('int32'); 
 del df['release_date'];
 
-#Transform Voting average to int
+#Transform Voting average to int (our class)
 df['vote_average'] = df['vote_average'].round(0);
 
 
