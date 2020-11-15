@@ -1,6 +1,7 @@
 # from exercise 8.1.1
 
 from data_transform import *
+from sklearn import preprocessing
 
 from matplotlib.pylab import (figure, semilogx, loglog, xlabel, ylabel, legend, 
                            title, subplot, show, grid)
@@ -9,13 +10,11 @@ from scipy.io import loadmat
 import sklearn.linear_model as lm
 from sklearn import model_selection
 from toolbox_02450 import rlr_validate
-from scipy import stats
 
 # Extract data
-y = df['revenue'].values
-y = stats.zscore(y)
+y = preprocessing.scale(df['revenue'].values)
 df_X = df.drop(['revenue', 'vote_average', 'vote_count', 'popularity'],1) * 1#convert bools
-X = stats.zscore(df_X.values)
+X = preprocessing.scale(df_X.values)
 attributeNames = df_X.columns
 N, M = df_X.shape
 
@@ -26,12 +25,12 @@ M = M+1
 
 ## Crossvalidation
 # Create crossvalidation partition for evaluation
-K = 10
-CV = model_selection.KFold(K, shuffle=True, random_state=1)
+K = 5
+CV = model_selection.KFold(K, shuffle=True)
 #CV = model_selection.KFold(K, shuffle=False)
 
 # Values of lambda
-lambdas = np.power(10.,range(0,8))
+lambdas = np.power(10.,range(-2,9))
 
 # Initialize variables
 #T = len(lambdas)
@@ -58,7 +57,6 @@ for train_index, test_index in CV.split(X,y):
     
     opt_val_err, opt_lambda, mean_w_vs_lambda, train_err_vs_lambda, test_err_vs_lambda = rlr_validate(X_train, y_train, lambdas, internal_cross_validation)
 
-    print(opt_lambda)
     # Standardize outer fold based on training set, and save the mean and standard
     # deviations since they're part of the model (they would be needed for
     # making new predictions) - for brevity we won't always store these in the scripts

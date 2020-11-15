@@ -6,12 +6,6 @@ import numpy as np
 df['original_language'] = df['original_language'] == 'en'; 
 df.rename(columns={'original_language': 'english'}, inplace=True);
 
-#Transform Title to number of characters
-df['title'] = df['title'].str.len().fillna(0);
-
-#Transform Tagline to number of characters
-df['tagline'] = df['tagline'].str.len().fillna(0);
-
 #Transform Time to Month and Years
 df.dropna(axis=0,subset=['release_date'], inplace=True);
 df_DateSplit = df['release_date'].str.split('/', expand=True);
@@ -19,7 +13,19 @@ df['month'] = df_DateSplit[1].astype('int32');
 df['year'] = df_DateSplit[2].astype('int32'); 
 del df['release_date'];
 
-#Transform Voting average to int (our class)
+
+#Save Title as array
+dataObjectNames = list(df['title'])
+
+#Transform Title to number of characters
+df['title'] = df['title'].str.len().fillna(0);
+
+#Transform Tagline to number of characters
+df['tagline'] = df['tagline'].str.len().fillna(0);
+
+
+
+#Transform Voting average to int
 df['vote_average'] = df['vote_average'].round(0);
 
 

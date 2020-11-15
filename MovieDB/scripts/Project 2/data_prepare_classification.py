@@ -2,17 +2,16 @@ from data_transform import *
 from sklearn import preprocessing
 
 # Extract X matrix and y vector
-y = df['revenue'].values
-X = df.drop(['revenue']).values
+y = df['vote_average'].values.astype(int)
 
-# Scale X to mean=0 and std=1
-X = preprocessing.scale(X)
+# Extract data
+df_X = df.drop(['revenue', 'vote_average', 'vote_count', 'popularity'],1) * 1#convert bools
+#X = preprocessing.scale(df_X.values)
+X = df_X.values
+attributeNames = df_X.columns
+N, M = df_X.shape
+classNames = list(np.array(range(11)))
+attributeNames = list(df_X.columns.values)
 
-# Classification variabels
-y = df['vote_average'].get_values()
-# del df['vote_average']
-
-# Compute values of N, M and C.
-N = len(y)
-#M = len(attributeNames)
-#C = len(classNames)
+# Compute values of C.
+C = len(classNames)
