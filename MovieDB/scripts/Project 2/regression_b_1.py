@@ -14,7 +14,7 @@ from scipy import stats
 
 # Extract data
 y = df['revenue'].values
-y = np.matrix(y).T
+y = stats.zscore(np.matrix(y).T)
 df_X = df.drop(['revenue', 'vote_average', 'vote_count', 'popularity'],1) * 1#convert bools
 X = df_X.values
 attributeNames = df_X.columns.tolist()
@@ -39,12 +39,12 @@ if do_pca_preprocessing:
 
 # Parameters for neural network classifier
 n_hidden_units = 2      # number of hidden units
-n_replicates = 1        # number of networks trained in each k-fold
+n_replicates = 2      # number of networks trained in each k-fold
 max_iter = 10000
 
 # K-fold crossvalidation
-K = 3                   # only three folds to speed up this example
-CV = model_selection.KFold(K, shuffle=True)
+K = 10                   # only three folds to speed up this example
+CV = model_selection.KFold(K, shuffle=True, random_state=1)
 
 # Setup figure for display of learning curves and error rates in fold
 summaries, summaries_axes = plt.subplots(1,2, figsize=(10,5))
