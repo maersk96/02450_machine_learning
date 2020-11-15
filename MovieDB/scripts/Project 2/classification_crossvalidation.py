@@ -14,6 +14,10 @@ CV = model_selection.KFold(n_splits=K,shuffle=True)
 
 MSE_train = np.empty((K,3))
 MSE_test = np.empty((K,3))
+error_rates = np.empty((K,3))
+
+def error_measure(y_predicted, y_actual):
+    return np.sum(y_predicted != y_actual) / len(y_actual)
 
 for (k, (train_index, test_index)) in enumerate(CV.split(X,y)):
     print('\nCrossvalidation fold: {0}/{1}'.format(k+1,K))
@@ -26,16 +30,13 @@ for (k, (train_index, test_index)) in enumerate(CV.split(X,y)):
     
     # Baseline model
     m0 = baseline_predict()
-    MSE_train[k,0] = np.square(y_train - m0 * np.ones(len(y_train))).sum() / y_train.shape[0]
-    MSE_test[k,0] = np.square(y_test - m0 * np.ones(len(y_test))).sum() / y_test.shape[0]
+    error_rates[k,0] = error_measure(m0 * np.ones(len(y_test), y_test))
     
     # LogReg model
     m1 = model_LR(X_train, y_train)
-    MSE_train[k,1] = np.square(y_train - m1.predict(X_train)).sum() / y_train.shape[0]
-    MSE_test[k,1] = np.square(y_test - m1.predict(X_test)).sum() / y_test.shape[0]
+    error_rates[k,1] = error_measure(m1.predict(X_test), y_test)
     
     # CT model
     m2 = model_CT(X_train, y_train)
-    MSE_train[k,2] = np.square(y_train - m2.predict(X_train)).sum() / y_train.shape[0]
-    MSE_test[k,2] = np.square(y_test - m2.predict(X_test)).sum() / y_test.shape[0]
+    error_rates[k,1] = error_measure(m2.predict(X_test), y_test)
 
