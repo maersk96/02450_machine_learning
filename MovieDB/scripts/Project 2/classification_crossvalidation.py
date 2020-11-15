@@ -7,7 +7,6 @@ import numpy as np
 
 from data_prepare_classification import *
 from classification_baseline import *
-from classification_CT_model import *
 
 K = 5
 CV = model_selection.KFold(n_splits=K,shuffle=True)
@@ -40,3 +39,6 @@ for (k, (train_index, test_index)) in enumerate(CV.split(X,y)):
     m2 = model_CT(X_train, y_train)
     error_rates[k,1] = error_measure(m2.predict(X_test), y_test)
 
+
+#
+print(baseline_predict())
